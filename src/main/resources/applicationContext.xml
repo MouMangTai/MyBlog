@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+	
+	<context:annotation-config></context:annotation-config>
+	<context:component-scan base-package="com.mmt" use-default-filters="false">
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
+	<context:component-scan base-package="com.mmt.myblog.service"></context:component-scan>
+	<!-- 数据源 -->
+	<bean id="DataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/ssm_crud?useUnicode=true&amp;characterEncoding=UTF-8"></property>
+		<property name="driverClass" value="com.mysql.jdbc.Driver"></property>
+		<property name="user" value="root"></property>
+		<property name="password" value="admin"></property>
+	</bean>
+	<!-- 与mybatis的整合 -->
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="DataSource"></property>
+		<property name="configLocation" value="classpath:mybatis.xml"></property>
+		<property name="mapperLocations" value="classpath:mapper/*.xml"></property>
+	</bean>
+	
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.mmt.myblog.dao"></property>
+		<property name="sqlSessionFactoryBeanName" value="sqlSession"></property>
+	</bean>
+	
+	
+	<bean id="SqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg name="sqlSessionFactory" ref="sqlSession"></constructor-arg>
+		<constructor-arg name="executorType" value="BATCH"></constructor-arg>
+	</bean>
+	<!-- 事务控制 -->
+	<bean id="TransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="DataSource"></property>
+	</bean>
+	
+	<aop:config>
+		<aop:pointcut expression="execution(* com.mmt.myblog.service..*(..))" id="txPoint"/>
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="txPoint"/>
+	</aop:config>
+	<tx:advice id="txAdvice" transaction-manager="TransactionManager">
+		<tx:attributes>
+			<tx:method name="*"/>
+			<tx:method name="get*" read-only="true"/>
+		</tx:attributes>
+	</tx:advice>
+</beans>
