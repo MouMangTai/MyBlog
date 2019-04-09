@@ -1,7 +1,6 @@
 package com.mmt.myblog.bean;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class ArticleExample {
@@ -335,52 +334,62 @@ public class ArticleExample {
             return (Criteria) this;
         }
 
-        public Criteria andArtPostTimeEqualTo(Date value) {
+        public Criteria andArtPostTimeEqualTo(String value) {
             addCriterion("art_post_time =", value, "artPostTime");
             return (Criteria) this;
         }
 
-        public Criteria andArtPostTimeNotEqualTo(Date value) {
+        public Criteria andArtPostTimeNotEqualTo(String value) {
             addCriterion("art_post_time <>", value, "artPostTime");
             return (Criteria) this;
         }
 
-        public Criteria andArtPostTimeGreaterThan(Date value) {
+        public Criteria andArtPostTimeGreaterThan(String value) {
             addCriterion("art_post_time >", value, "artPostTime");
             return (Criteria) this;
         }
 
-        public Criteria andArtPostTimeGreaterThanOrEqualTo(Date value) {
+        public Criteria andArtPostTimeGreaterThanOrEqualTo(String value) {
             addCriterion("art_post_time >=", value, "artPostTime");
             return (Criteria) this;
         }
 
-        public Criteria andArtPostTimeLessThan(Date value) {
+        public Criteria andArtPostTimeLessThan(String value) {
             addCriterion("art_post_time <", value, "artPostTime");
             return (Criteria) this;
         }
 
-        public Criteria andArtPostTimeLessThanOrEqualTo(Date value) {
+        public Criteria andArtPostTimeLessThanOrEqualTo(String value) {
             addCriterion("art_post_time <=", value, "artPostTime");
             return (Criteria) this;
         }
 
-        public Criteria andArtPostTimeIn(List<Date> values) {
+        public Criteria andArtPostTimeLike(String value) {
+            addCriterion("art_post_time like", value, "artPostTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andArtPostTimeNotLike(String value) {
+            addCriterion("art_post_time not like", value, "artPostTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andArtPostTimeIn(List<String> values) {
             addCriterion("art_post_time in", values, "artPostTime");
             return (Criteria) this;
         }
 
-        public Criteria andArtPostTimeNotIn(List<Date> values) {
+        public Criteria andArtPostTimeNotIn(List<String> values) {
             addCriterion("art_post_time not in", values, "artPostTime");
             return (Criteria) this;
         }
 
-        public Criteria andArtPostTimeBetween(Date value1, Date value2) {
+        public Criteria andArtPostTimeBetween(String value1, String value2) {
             addCriterion("art_post_time between", value1, value2, "artPostTime");
             return (Criteria) this;
         }
 
-        public Criteria andArtPostTimeNotBetween(Date value1, Date value2) {
+        public Criteria andArtPostTimeNotBetween(String value1, String value2) {
             addCriterion("art_post_time not between", value1, value2, "artPostTime");
             return (Criteria) this;
         }

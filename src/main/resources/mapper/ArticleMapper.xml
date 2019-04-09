@@ -8,7 +8,7 @@
     -->
     <id column="Id" jdbcType="INTEGER" property="id" />
     <result column="art_title" jdbcType="VARCHAR" property="artTitle" />
-    <result column="art_post_time" jdbcType="TIMESTAMP" property="artPostTime" />
+    <result column="art_post_time" jdbcType="VARCHAR" property="artPostTime" />
     <result column="art_category" jdbcType="VARCHAR" property="artCategory" />
     <result column="art_visitor" jdbcType="INTEGER" property="artVisitor" />
     <result column="art_context" jdbcType="VARCHAR" property="artContext" />
@@ -140,7 +140,7 @@
     insert into article (Id, art_title, art_post_time, 
       art_category, art_visitor, art_context
       )
-    values (#{id,jdbcType=INTEGER}, #{artTitle,jdbcType=VARCHAR}, #{artPostTime,jdbcType=TIMESTAMP}, 
+    values (#{id,jdbcType=INTEGER}, #{artTitle,jdbcType=VARCHAR}, #{artPostTime,jdbcType=VARCHAR}, 
       #{artCategory,jdbcType=VARCHAR}, #{artVisitor,jdbcType=INTEGER}, #{artContext,jdbcType=VARCHAR}
       )
   </insert>
@@ -178,7 +178,7 @@
         #{artTitle,jdbcType=VARCHAR},
       </if>
       <if test="artPostTime != null">
-        #{artPostTime,jdbcType=TIMESTAMP},
+        #{artPostTime,jdbcType=VARCHAR},
       </if>
       <if test="artCategory != null">
         #{artCategory,jdbcType=VARCHAR},
@@ -215,7 +215,7 @@
         art_title = #{record.artTitle,jdbcType=VARCHAR},
       </if>
       <if test="record.artPostTime != null">
-        art_post_time = #{record.artPostTime,jdbcType=TIMESTAMP},
+        art_post_time = #{record.artPostTime,jdbcType=VARCHAR},
       </if>
       <if test="record.artCategory != null">
         art_category = #{record.artCategory,jdbcType=VARCHAR},
@@ -239,7 +239,7 @@
     update article
     set Id = #{record.id,jdbcType=INTEGER},
       art_title = #{record.artTitle,jdbcType=VARCHAR},
-      art_post_time = #{record.artPostTime,jdbcType=TIMESTAMP},
+      art_post_time = #{record.artPostTime,jdbcType=VARCHAR},
       art_category = #{record.artCategory,jdbcType=VARCHAR},
       art_visitor = #{record.artVisitor,jdbcType=INTEGER},
       art_context = #{record.artContext,jdbcType=VARCHAR}
@@ -258,7 +258,7 @@
         art_title = #{artTitle,jdbcType=VARCHAR},
       </if>
       <if test="artPostTime != null">
-        art_post_time = #{artPostTime,jdbcType=TIMESTAMP},
+        art_post_time = #{artPostTime,jdbcType=VARCHAR},
       </if>
       <if test="artCategory != null">
         art_category = #{artCategory,jdbcType=VARCHAR},
@@ -279,7 +279,7 @@
     -->
     update article
     set art_title = #{artTitle,jdbcType=VARCHAR},
-      art_post_time = #{artPostTime,jdbcType=TIMESTAMP},
+      art_post_time = #{artPostTime,jdbcType=VARCHAR},
       art_category = #{artCategory,jdbcType=VARCHAR},
       art_visitor = #{artVisitor,jdbcType=INTEGER},
       art_context = #{artContext,jdbcType=VARCHAR}

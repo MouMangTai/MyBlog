@@ -1,7 +1,5 @@
 package com.mmt.myblog.bean;
 
-import java.util.Date;
-
 public class Article {
     /**
      *
@@ -28,7 +26,7 @@ public class Article {
      *
      * @mbg.generated
      */
-    private Date artPostTime;
+    private String artPostTime;
 
     /**
      *
@@ -113,7 +111,7 @@ public class Article {
      *
      * @mbg.generated
      */
-    public Date getArtPostTime() {
+    public String getArtPostTime() {
         return artPostTime;
     }
 
@@ -125,8 +123,8 @@ public class Article {
      *
      * @mbg.generated
      */
-    public void setArtPostTime(Date artPostTime) {
-        this.artPostTime = artPostTime;
+    public void setArtPostTime(String artPostTime) {
+        this.artPostTime = artPostTime == null ? null : artPostTime.trim();
     }
 
     /**
